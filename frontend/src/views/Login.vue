@@ -37,11 +37,16 @@ export default {
 
         if (response.success) {
           // Store user data excluding sensitive information
-          localStorage.setItem('user', JSON.stringify(response.data));
-          this.$router.push({ name: 'Dashboard' });
+          const user = response.data;
+          localStorage.setItem('user', JSON.stringify(user));
+          
+          if (user.role === 'admin') {
+          this.$router.push({ name: 'AdminView' });
         } else {
-          this.errorMessage = response.error || 'Invalid credentials';
+          this.$router.push({ name: 'UserView' });
         }
+        } 
+        
       } catch (error) {
         this.errorMessage = 'Login failed. Please try again later.';
         console.error("Login error:", error);

@@ -21,7 +21,7 @@ type User struct {
 	LNAME    string `json:"lname"`
 	EMAIL    string `json:"email"`
 	PASSWORD string `json:"-"`
-	ROLE     string `json:"-"`
+	ROLE     string `json:"role"`
 }
 
 var db *sql.DB
@@ -222,6 +222,7 @@ func loginUser(w http.ResponseWriter, r *http.Request) {
 		FNAME: dbUser.FNAME,
 		LNAME: dbUser.LNAME,
 		EMAIL: dbUser.EMAIL,
+		ROLE: dbUser.ROLE,
 	}
 	sendSuccessResponse(w, responseUser)
 }
