@@ -33,7 +33,7 @@ export const createUser = async (userData) => {
 
 export const getUsers = async () => {
   try {
-    const response = await api.get('/users');
+    const response = await api.get('/getUsers');
     return response.data;
   } catch (error) {
     return handleError(error);
@@ -42,7 +42,7 @@ export const getUsers = async () => {
 
 export const updateUser = async (userId, userData) => {
   try {
-    const response = await api.put(`/users/${userId}`, userData);
+    const response = await api.put(`/updateUser/${userId}`, userData);
     return response.data;
   } catch (error) {
     return handleError(error);
@@ -51,7 +51,7 @@ export const updateUser = async (userId, userData) => {
 
 export const deleteUser = async (userId) => {
   try {
-    const response = await api.delete(`/users/${userId}`);
+    const response = await api.delete(`/deleteUser/${userId}`);
     return response.data;
   } catch (error) {
     return handleError(error);
@@ -60,7 +60,7 @@ export const deleteUser = async (userId) => {
 
 export const getUserById = async (userId) => {
   try {
-    const response = await api.get(`/users/${userId}`);
+    const response = await api.get(`/getUserByID/${userId}`);
     return response.data;
   } catch (error) {
     return handleError(error);
@@ -72,6 +72,6 @@ export const loginUser = async (email, password) => {
     const response = await api.post('/login', { email, password });
     return response.data;
   } catch (error) {
-    return handleError(error);
+    return handleError(error); 
   }
 };

@@ -235,10 +235,10 @@ func main() {
 
 	// Configure routes
 	r.HandleFunc("/users", createUser).Methods("POST")
-	r.HandleFunc("/users", getUsers).Methods("GET")
-	r.HandleFunc("/users/{id}", updateUser).Methods("PUT")
-	r.HandleFunc("/users/{id}", deleteUser).Methods("DELETE")
-	r.HandleFunc("/users/{id}", getUserByID).Methods("GET")
+	r.HandleFunc("/getUser", getUsers).Methods("GET")
+	r.HandleFunc("/updateUser/{id}", updateUser).Methods("PUT")
+	r.HandleFunc("/deleteUser/{id}", deleteUser).Methods("DELETE")
+	r.HandleFunc("/getUserByID/{id}", getUserByID).Methods("GET")
 	r.HandleFunc("/login", loginUser).Methods("POST")
 
 	// CORS configuration

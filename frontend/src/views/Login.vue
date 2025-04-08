@@ -40,7 +40,7 @@ export default {
           const user = response.data;
           localStorage.setItem('user', JSON.stringify(user));
           
-          if (user.role === 'admin') {
+          if (user.role === "admin") {
           this.$router.push({ name: 'AdminView' });
         } else {
           this.$router.push({ name: 'UserView' });
