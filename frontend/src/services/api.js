@@ -24,7 +24,7 @@ export default api;
 
 export const createUser = async (userData) => {
   try {
-    const response = await api.post('/users', userData);
+    const response = await api.post('/createUsers', userData);
     return response.data;
   } catch (error) {
     return handleError(error);

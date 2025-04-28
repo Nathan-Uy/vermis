@@ -3,6 +3,7 @@ import Login from '../views/Login.vue';
 import Dashboard from '../views/Dashboard.vue';
 import AdminView from "../views/AdminView/AdminView.vue";
 import UserView from "../views/UserView/UserView.vue";
+import createUser from "../views/createUser.vue";
 const routes = [
     { 
         path: '/', 
@@ -23,6 +24,11 @@ const routes = [
         path: '/UserView',
         name: 'UserView',
         component: UserView
+    },
+    {
+        path: '/createUser',
+        name: 'createUser',
+        component: createUser
     }
 ];
 

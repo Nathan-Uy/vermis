@@ -11,6 +11,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 	"golang.org/x/crypto/bcrypt"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -20,7 +21,7 @@ type User struct {
 	FNAME    string `json:"fname"`
 	LNAME    string `json:"lname"`
 	EMAIL    string `json:"email"`
-	PASSWORD string `json:"-"`
+	PASSWORD string `json:" "`
 	ROLE     string `json:"role"`
 }
 
@@ -88,10 +89,11 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := db.Exec("INSERT INTO userdb (fname, lname, email, password, role) VALUES (?, ?, ?, ?, 'user')",
-		user.FNAME, user.LNAME, user.EMAIL, hashedPassword)
+	result, err := db.Exec("INSERT INTO userdb (fname, lname, email, password, role) VALUES (?, ?, ?, ?, ?)",
+		user.FNAME, user.LNAME, user.EMAIL, hashedPassword, user.ROLE)
 	if err != nil {
 		sendErrorResponse(w, "Error creating user", http.StatusInternalServerError)
+		log.Println(err)
 		return
 	}
 
@@ -222,7 +224,7 @@ func loginUser(w http.ResponseWriter, r *http.Request) {
 		FNAME: dbUser.FNAME,
 		LNAME: dbUser.LNAME,
 		EMAIL: dbUser.EMAIL,
-		ROLE: dbUser.ROLE,
+		ROLE:  dbUser.ROLE,
 	}
 	sendSuccessResponse(w, responseUser)
 }
@@ -234,7 +236,7 @@ func main() {
 	r := mux.NewRouter()
 
 	// Configure routes
-	r.HandleFunc("/users", createUser).Methods("POST")
+	r.HandleFunc("/createUsers", createUser).Methods("POST")
 	r.HandleFunc("/getUser", getUsers).Methods("GET")
 	r.HandleFunc("/updateUser/{id}", updateUser).Methods("PUT")
 	r.HandleFunc("/deleteUser/{id}", deleteUser).Methods("DELETE")
